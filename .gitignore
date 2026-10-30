@@ -1,0 +1,16 @@
+# Builds y artefactos
+dist/
+web-ext-artifacts/
+*.zip
+*.xpi
+*.crx
+*.pem
+
+# Demo (se regenera con tools/make_video.py)
+dist/demo/
+
+# Node / sistema
+node_modules/
+npm-debug.log*
+.DS_Store
+*.swp

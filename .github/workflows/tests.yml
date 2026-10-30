@@ -1,0 +1,39 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  motor:
+    name: Motor (harness, sin navegador)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Pruebas del motor (TTL, bombas, protecciones, persistencia)
+        run: node test/harness.js
+
+  empaquetado:
+    name: Paquetes Chrome + Firefox
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Construir los dos paquetes
+        run: |
+          chmod +x build.sh
+          ./build.sh
+      - name: Validar el paquete de Firefox (web-ext lint)
+        run: npx --yes web-ext@latest lint --source-dir dist/firefox --warnings-as-errors
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tab-bomb-packages
+          path: |
+            dist/tab-bomb-chrome.zip
+            dist/tab-bomb-firefox.zip

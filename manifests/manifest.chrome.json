@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Bomb — mata pestañas zombi",
+  "short_name": "Tab Bomb",
+  "version": "1.0.0",
+  "description": "Cierra (o suspende) las pestañas que llevas demasiado tiempo sin usar, con TTL, cuenta atrás tipo bomba y lista blanca.",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "tabs",
+    "storage",
+    "alarms",
+    "scripting",
+    "idle",
+    "contextMenus",
+    "notifications"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Tab Bomb",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

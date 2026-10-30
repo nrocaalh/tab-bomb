@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tab Bomb</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="head">
+    <div class="brand">
+      <span class="logo">💣</span>
+      <div>
+        <h1>Tab Bomb</h1>
+        <p id="subtitle">cargando…</p>
+      </div>
+    </div>
+    <div class="head-actions">
+      <button id="btn-settings" class="ghost" title="Ajustes">⚙️</button>
+      <label class="switch" title="Activar / desactivar">
+        <input type="checkbox" id="enabled">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </header>
+
+  <div id="paused" class="banner hidden">⏸️ En pausa: equipo inactivo o margen de vuelta activo.</div>
+
+  <main id="view-list" class="view">
+    <div id="tabs" class="list"></div>
+    <div id="empty" class="empty hidden">Sin pestañas que vigilar 🎉</div>
+  </main>
+
+  <main id="view-settings" class="view hidden">
+    <div class="field">
+      <label for="ttl">Vida sin usar (TTL) <b id="ttl-val">60 min</b></label>
+      <input type="range" id="ttl" min="1" max="240" step="1" value="60">
+      <div class="hint">Tiempo que una pestaña puede estar sin usarse antes de que se arme la bomba.</div>
+    </div>
+
+    <div class="field">
+      <label for="grace">Cuenta atrás de la bomba <b id="grace-val">60 s</b></label>
+      <input type="range" id="grace" min="0" max="300" step="5" value="60">
+      <div class="hint">Aviso final con cuenta atrás antes de cerrarla. 0 = cierre inmediato al cumplir el TTL.</div>
+    </div>
+
+    <div class="field row">
+      <label for="mode">Al explotar</label>
+      <select id="mode">
+        <option value="close">Cerrar la pestaña</option>
+        <option value="discard">Suspenderla (sigue en la barra)</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Nunca tocar</label>
+      <label class="check"><input type="checkbox" id="ignorePinned"> Pestañas fijadas</label>
+      <label class="check"><input type="checkbox" id="ignoreAudible"> Pestañas con audio</label>
+      <label class="check"><input type="checkbox" id="ignoreActive"> La pestaña activa</label>
+      <label class="check"><input type="checkbox" id="ignoreDiscarded"> Las ya suspendidas</label>
+      <label class="check"><input type="checkbox" id="ignoreGrouped"> Pestañas agrupadas</label>
+      <label class="check"><input type="checkbox" id="keepLastTabInWindow"> La última pestaña de una ventana</label>
+    </div>
+
+    <div class="field">
+      <label>Avisos</label>
+      <label class="check"><input type="checkbox" id="showOverlay"> Cartel con cuenta atrás en la página</label>
+      <label class="check"><input type="checkbox" id="notifyOnArm"> Notificación del sistema al armarse</label>
+      <label class="check"><input type="checkbox" id="pauseWhenIdle"> Pausar mientras el equipo está inactivo</label>
+    </div>
+
+    <div class="field">
+      <label for="whitelist">Lista blanca de dominios</label>
+      <textarea id="whitelist" rows="3" placeholder="mail.google.com&#10;github.com&#10;*.notion.so"></textarea>
+      <div class="hint">Uno por línea (o separados por comas). Estas pestañas nunca mueren.</div>
+    </div>
+
+    <div class="stats" id="stats"></div>
+  </main>
+
+  <footer class="foot">
+    <button id="btn-zombies" class="danger">💥 Cerrar zombis ahora</button>
+    <button id="btn-refresh" class="ghost">↻</button>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
